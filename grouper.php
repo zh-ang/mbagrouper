@@ -82,6 +82,21 @@ class Executor {
         
     }
 
+    public function outputHTML() {
+        echo "<p>在尝试过{$this->_a}次后，终于分组成功！</p>";
+        echo "<table>";
+        foreach ($this->_group as $id => $group) {
+            echo "<tr>";
+            echo "<th>第",($id+1),"学习小组[{$group->dir}]</th>";
+            foreach ($group->members as $unit) {
+                echo "<td>{$unit->name}</td>";
+            }
+            echo "</tr>";
+        }
+        echo "在尝试过{$this->_a}次后，终于分组成功！";
+        
+    }
+
     public function execute($n, $list) {
         $this->_n = $n;
         $this->_group = array();
@@ -124,8 +139,17 @@ class Executor {
 
 }
 
-mt_srand(1);
+switch (php_sapi_name()) {
+    case "cli": mt_srand(1); break;
+    case "apache2handler": mt_srand($_GET["i"]); break;
+}
 $data = require("data.php");
 $e = new Executor($data);
 $e->run();
-$e->output();
+switch (php_sapi_name()) {
+    case "cli": $e->output(); break;
+    case "apache2handler": $e->outputHTML(); break;
+    default: $e->output(); break;
+}
+
+
