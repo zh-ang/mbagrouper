@@ -83,8 +83,8 @@ class Executor {
     }
 
     public function outputHTML() {
-        echo "<p>在尝试过{$this->_a}次后，终于分组成功！</p>";
-        echo "<table>";
+        echo "<p>因为班长说没有预算，所以我们没有美工，凑活看吧！</p>";
+        echo "<table border=1>";
         foreach ($this->_group as $id => $group) {
             echo "<tr>";
             echo "<th>第",($id+1),"学习小组[{$group->dir}]</th>";
@@ -93,7 +93,8 @@ class Executor {
             }
             echo "</tr>";
         }
-        echo "在尝试过{$this->_a}次后，终于分组成功！";
+	echo "</table>";
+        // echo "<p>在尝试过{$this->_a}次后，终于分组成功！</p>";
         
     }
 
