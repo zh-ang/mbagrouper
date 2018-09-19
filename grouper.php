@@ -104,6 +104,7 @@ class Executor {
         for ($i=0; $i<$this->_n; $i++) {
             $this->_group[$i] = new Group;
         }
+	shuffle($list);
         foreach ($list as $unit) {
             if ($this->insert($unit) == false) {
                 return false;
