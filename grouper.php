@@ -114,7 +114,7 @@ class Executor {
     }
 
     public function insert(Unit $unit) {
-        $off = mt_rand() % $this->_n;
+        $off = rand() % $this->_n;
         $min = $this->_m;
         for ($i=0; $i<$this->_n; $i++) {
             $k = ($i+$off) % $this->_n;
@@ -142,9 +142,10 @@ class Executor {
 }
 
 switch (php_sapi_name()) {
-    case "cli": mt_srand(1); break;
-    case "apache2handler": mt_srand($_GET["i"]); break;
+    case "cli": srand(2730); break;
+    case "apache2handler": srand(intval($_GET["i"])); break;
 }
+
 $data = require("data.php");
 $e = new Executor($data);
 $e->run();
