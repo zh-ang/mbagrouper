@@ -104,7 +104,7 @@ class Executor {
         for ($i=0; $i<$this->_n; $i++) {
             $this->_group[$i] = new Group;
         }
-	shuffle($list);
+	// shuffle($list);
         foreach ($list as $unit) {
             if ($this->insert($unit) == false) {
                 return false;
@@ -118,7 +118,7 @@ class Executor {
         $min = $this->_m;
         for ($i=0; $i<$this->_n; $i++) {
             $k = ($i+$off) % $this->_n;
-            if ($this->_group[$k]->acceptable($unit->dir) && $this->_group[$k]->count < $this->_m) {
+            if ($this->_group[$k]->acceptable($unit->dir) && $this->_group[$k]->count + $unit->count <= $this->_m) {
                 $this->_group[$k]->accept($unit);
                 return true;
             }
